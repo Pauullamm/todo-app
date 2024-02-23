@@ -4,41 +4,26 @@ import Todolist from './components/TodoBody.js';
 import Addlistbutton from './components/NewTodoButton.js';
 
 function Projectdashboard() {
+  const [todos, settodos] = useState([]);
 
-  const a_todo = {
-    "title": "First Todo",
-    "Description": "",
-    "dueDate": "",
-    "priority": ""
-  }
-
-  const all_todos = []
-
-  const [todos, settodos] = useState(all_todos);
-  const [clickedstatus, setClickedStatus] = useState(false);
-
-  const checkForEmpty = () => {
-    if (todos.length === 0) {
-
-      return;
-    }
-  };
-
-  useEffect(() => {
-    checkForEmpty();
-  }, [todos]);
-
-  const newList = () => {
-    console.log("clicked");
-    setClickedStatus((prevStatus) => !prevStatus);
-    settodos(prevStatus => prevStatus.push(a_todo));
+  const createNewTodo = () => {
+    const newTodoObj = {
+      id: "",
+      "title": "First Todo",
+      "Description": "",
+      "dueDate": "",
+      "priority": ""
+    };
+    settodos(prevTodos => [...prevTodos, newTodoObj]);
     console.log(todos)
   };
 
   return (
     <>
-      <Addlistbutton onClick={newList} />
-      <Todolist />
+      <Addlistbutton onClick={createNewTodo} />
+      {todos.map((data) => (
+        <Todolist key={data.id} title={data.title}/>
+      ))}
     </>
   );
 }

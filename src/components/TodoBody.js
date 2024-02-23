@@ -10,12 +10,12 @@ function Todoname(props) {
 }
 
 
-function Todolist() {
+function Todolist(props) {
 // function to add new list items to todo-list
 
     return (
         <div className='todo-container'>
-            <Todoname className="todo-title" name="Name of List"/>  
+            <Todoname className="todo-title" name={props.title}/>  
         </div>
     )
     }
