@@ -4,7 +4,7 @@ Body {
 
 .navbar-container {
   width: 100vw;
-  height: 30px;
+  height: 50px;
   background-color: black;
 }
 
@@ -15,12 +15,19 @@ Body {
   background-color: #ffc93e;
   border-radius: 10px;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+  margin: 10px;
 }
+
 
 .todo-container:active {
   cursor: grabbing;
 }
 
+.todo-handler {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
 .wrapper-container {
   height:fit-content;
   width: fit-content;
@@ -47,4 +54,23 @@ Body {
 .new-list-button:hover {
   cursor: pointer;
   scale: 1.05;
+}
+
+.input-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: grey;
+  opacity: 0.33;
+  height: 100vh;
+  width: 100vw;
+  z-index: 9999;
+  position: absolute;
+}
+
+.input-info-container {
+  height: 200px;
+  width: 200px;
+  background-color: #FEECE2;
+  border-radius: 10px;
 }
