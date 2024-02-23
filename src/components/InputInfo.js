@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import '../App.css'
 
-
-
 function InputForm() {
     const [inputfield, setInputField] = useState({
         title: "",
@@ -16,6 +14,7 @@ function InputForm() {
         alert(`Here are the details you entered: ${inputfield.title}, ${inputfield.description}, ${inputfield.dueDate}, ${inputfield.priority}`)
     }
     return (
+    // NEED TO FIX THIS PART
     <form onSubmit={handleSubmit}>
         <label>Name of To-Do
             <input type="text" value={inputfield.title} onChange={(e) => setInputField(e.target.value)}/>
