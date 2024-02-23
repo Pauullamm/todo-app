@@ -1,23 +1,56 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState, useEffect } from 'react'
+import Todolist from './components/TodoBody.js';
+import Addlistbutton from './components/NewTodoButton.js';
+
+function Projectdashboard() {
+
+  const a_todo = {
+    "title": "First Todo",
+    "Description": "",
+    "dueDate": "",
+    "priority": ""
+  }
+
+  const all_todos = []
+
+  const [todos, settodos] = useState(all_todos);
+  const [clickedstatus, setClickedStatus] = useState(false);
+
+  const checkForEmpty = () => {
+    if (todos.length === 0) {
+
+      return;
+    }
+  };
+
+  useEffect(() => {
+    checkForEmpty();
+  }, [todos]);
+
+  const newList = () => {
+    console.log("clicked");
+    setClickedStatus((prevStatus) => !prevStatus);
+    settodos(prevStatus => prevStatus.push(a_todo));
+    console.log(todos)
+  };
+
+  return (
+    <>
+      <Addlistbutton onClick={newList} />
+      <Todolist />
+    </>
+  );
+}
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='wrapper-container'>
+        <Projectdashboard />
+      </div>
+      
     </div>
   );
 }
