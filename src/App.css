@@ -1,6 +1,14 @@
 Body {
   background-color: #fefdfc;
 }
+
+.navbar-container {
+  width: 100vw;
+  height: 30px;
+  background-color: black;
+}
+
+
 .todo-container {
   height: 300px;
   width: 300px;

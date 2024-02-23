@@ -2,6 +2,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react'
 import Todolist from './components/TodoBody.js';
 import Addlistbutton from './components/NewTodoButton.js';
+import Navbar from './components/Dashboard.js';
 
 function Projectdashboard() {
   const [todos, settodos] = useState([]);
@@ -32,6 +33,7 @@ function Projectdashboard() {
 function App() {
   return (
     <div className="App">
+      <Navbar />
       <div className='wrapper-container'>
         <Projectdashboard />
       </div>
