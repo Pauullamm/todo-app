@@ -69,8 +69,16 @@ Body {
 }
 
 .input-info-container {
-  height: 200px;
-  width: 200px;
-  background-color: #FEECE2;
+  height: 400px;
+  width: 400px;
+  background-color: black;
   border-radius: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+
+.input-item {
+  margin: 10px;
 }
