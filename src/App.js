@@ -7,9 +7,9 @@ import FormComponent from './components/FormComponent.js';
 
 function Projectdashboard(props) {
   const [todos, settodos] = useState([]);
-  const [clickedtimes, setClickedtimes] = useState(0)
-
-
+  const [clickedtimes, setClickedtimes] = useState(0);
+  const [formdisplay, setformdisplay] = useState(false);
+  console.log(`this is the form display before:${formdisplay}`)
   const submitData = (data) => {
     const newTodoObj = {
       id: clickedtimes,
@@ -24,15 +24,18 @@ function Projectdashboard(props) {
       console.log(todos)
   };
 
-
-  // onClick={createNewTodo} 
+  const revealForm = () => {
+    setformdisplay(true);
+    console.log(`this is the form display now: ${formdisplay}, ${typeof formdisplay}`);
+  }
 
 
   return (
     <div>
-      <FormComponent onSubmit={submitData}/>
+      <Addlistbutton onClick={revealForm}/>
 
-      <Addlistbutton />
+      <FormComponent onSubmit={submitData} reveal={formdisplay}/>
+
       <div className='todo-handler'>
         {todos.map((data) => (
           <Todolist key={data.id} title={data.title} />

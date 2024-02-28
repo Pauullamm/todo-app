@@ -56,29 +56,6 @@ Body {
   scale: 1.05;
 }
 
-.input-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: grey;
-  opacity: 0.33;
-  height: 100vh;
-  width: 100vw;
-  z-index: 9999;
-  position: absolute;
-}
-
-.input-info-container {
-  height: 400px;
-  width: 400px;
-  background-color: black;
-  border-radius: 10px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: column;
-}
-
-.input-item {
-  margin: 10px;
+.form-container {
+  margin-top: 30px;
 }

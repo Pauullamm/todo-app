@@ -2,11 +2,21 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-const FormComponent = ({ onSubmit }) => {
+const FormComponent = (props) => {
 const { register, handleSubmit, formState } = useForm();
 
+const defaultStyling = {
+    display: "none"
+}
+
+const shownStyling = {
+    display: "block"
+}
+console.log(props.reveal)
+
 return (
-<form onSubmit={handleSubmit(onSubmit)}>
+<div className="form-container" style={props.reveal === true ? shownStyling : defaultStyling}>
+<form onSubmit={handleSubmit(props.onSubmit)}>
     <label>Title:</label>
     <input {...register("title")} />
 
@@ -25,6 +35,8 @@ return (
     Submit
     </button>
 </form>
+</div>
+
 );
 };
 
