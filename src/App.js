@@ -2,26 +2,29 @@ import './App.css';
 import React, { useState } from 'react'
 import Todolist from './components/TodoBody.js';
 import Addlistbutton from './components/NewTodoButton.js';
-import Navbar from './components/Dashboard.js';
+// import Navbar from './components/Dashboard.js';
 import FormComponent from './components/FormComponent.js';
 
-function Projectdashboard(props) {
+function Projectdashboard() {
   const [todos, settodos] = useState([]);
   const [clickedtimes, setClickedtimes] = useState(0);
   const [formdisplay, setformdisplay] = useState(false);
+  
 
   const submitData = (data) => {
+    //creates an object containing data from the FormComponent
+
+    console.log(data)
     const newTodoObj = {
       id: clickedtimes,
       "title": data.title,
       "Description": data.description,
-      "dueDate": props.due,
-      "priority": props.priority,
+      "dueDate": data.due,
+      "priority": data.category,
       active: true,
     };
       setClickedtimes(prevClickedtimes => prevClickedtimes + 1)
       settodos(prevTodos => [...prevTodos, newTodoObj]);
-      console.log(todos)
   };
 
   const revealForm = () => {
@@ -36,8 +39,8 @@ function Projectdashboard(props) {
       <FormComponent onSubmit={submitData} reveal={formdisplay}/>
 
       <div className='todo-handler'>
-        {todos.map((data) => (
-          <Todolist key={data.id} title={data.title} desc={data.Description}/>
+        {todos.map((info) => (
+          <Todolist key={info.id} title={info.title} desc={info.Description} priority={info.priority}/>
         ))}
       </div>
     </div>

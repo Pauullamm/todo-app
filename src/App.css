@@ -14,12 +14,14 @@ p {
 
 
 .todo-container {
-  height: 300px;
+  height: max-content;
   width: 300px;
   background-color: #CCD3CA;
   border-radius: 10px;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
   margin: 10px;
+  opacity:1;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 
@@ -38,9 +40,34 @@ p {
   margin: 30px;
 }
 
-.todo-name {
+.todo-close {
+  cursor: pointer;
+  margin: 5px;
+  border-radius: 6px;
+  width:min-content;
+  height:min-content;
+  transition: all 0.3s ease;
+}
+
+.todo-close:hover {
+  box-shadow: 10px 15px 25px rgba(0, 0, 0, 0.1);
+  
+}
+
+
+
+.todo-name  {
   margin: 20px;
 }
+
+.todo-desc {
+  margin:20px;
+  word-wrap: break-word;
+  overflow: hidden;
+  white-space: normal;
+}
+
+
 
 /* .new-list-button {
   height: 50px;
@@ -101,3 +128,5 @@ p {
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
 
 }
+
+
