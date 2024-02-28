@@ -9,7 +9,7 @@ function Projectdashboard(props) {
   const [todos, settodos] = useState([]);
   const [clickedtimes, setClickedtimes] = useState(0);
   const [formdisplay, setformdisplay] = useState(false);
-  console.log(`this is the form display before:${formdisplay}`)
+
   const submitData = (data) => {
     const newTodoObj = {
       id: clickedtimes,
@@ -26,7 +26,6 @@ function Projectdashboard(props) {
 
   const revealForm = () => {
     setformdisplay(true);
-    console.log(`this is the form display now: ${formdisplay}, ${typeof formdisplay}`);
   }
 
 
@@ -38,7 +37,7 @@ function Projectdashboard(props) {
 
       <div className='todo-handler'>
         {todos.map((data) => (
-          <Todolist key={data.id} title={data.title} />
+          <Todolist key={data.id} title={data.title} desc={data.Description}/>
         ))}
       </div>
     </div>

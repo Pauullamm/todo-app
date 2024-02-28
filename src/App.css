@@ -1,5 +1,5 @@
 Body {
-  background-color: #fefdfc;
+  background-color: #F5E8DD;
 }
 
 .navbar-container {
@@ -12,7 +12,7 @@ Body {
 .todo-container {
   height: 300px;
   width: 300px;
-  background-color: #ffc93e;
+  background-color: #CCD3CA;
   border-radius: 10px;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
   margin: 10px;
@@ -38,22 +38,44 @@ Body {
   margin: 20px;
 }
 
-.new-list-button {
+/* .new-list-button {
   height: 50px;
   width: 70px;
-  background-color: green;
+  background-color: #B5C0D0;
   border-radius: 10px;
-  color: white;
+  color: black;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
   transition: scale 0.1s ease-in-out;
+} */
+
+.new-list-button {
+  margin: 0;
+  padding: 17px;
+  border-radius: 50px;
+  width:max-content;
+  cursor: pointer;
+  border: 0;
+  background-color: #B5C0D0;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+  letter-spacing: 1px;
+  transition: all 0.5s ease;
 }
 
 .new-list-button:hover {
   cursor: pointer;
   scale: 1.05;
+  letter-spacing: 2px;
+}
+
+.new-list-button:active {
+  letter-spacing: 3px;
+  background-color: white;
+  color: black;
+  transform: translateY(2px);
+  transition: 50ms;
 }
 
 .form-container {

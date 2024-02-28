@@ -9,13 +9,22 @@ function Todoname(props) {
     )
 }
 
+function TodoDesc(props) {
+    return (
+        <div>
+            <p>{props.desc}</p>
+        </div>
+    )
+}
 
 function Todolist(props) {
 // function to add new list items to todo-list
 
     return (
         <div className='todo-container'>
-            <Todoname className="todo-title" name={props.title}/>  
+            <Todoname className="todo-title" name={props.title}/>
+            <TodoDesc className="todo-description" desc={props.desc}/>  
+
         </div>
     )
     }
