@@ -48,7 +48,7 @@ function Projectdashboard(props) {
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className='wrapper-container'>
         <Projectdashboard />

@@ -17,13 +17,16 @@ console.log(props.reveal)
 return (
 <div className="form-container" style={props.reveal === true ? shownStyling : defaultStyling}>
 <form onSubmit={handleSubmit(props.onSubmit)}>
-    <label>Title:</label>
-    <input {...register("title")} />
-
-    <label>Description:</label>
-    <input {...register("description")} />
-
-    <div className="input-item">
+    <div >
+        <label>Title:</label>
+        <input className="input-item" {...register("title")} />
+    </div>
+    <div >
+        <label>Description:</label>
+        <input className="input-item" {...register("description")} />
+    </div>
+    
+    <div>
     <select {...register("category", { required: true })}>
         <option value="">Select Priority...</option>
         <option value="Low">Low</option>
