@@ -1,9 +1,8 @@
 import './App.css';
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Todolist from './components/TodoBody.js';
 import Addlistbutton from './components/NewTodoButton.js';
 import Navbar from './components/Dashboard.js';
-import InputComponent from './components/InputInfo.js';
 import FormComponent from './components/FormComponent.js';
 
 function Projectdashboard(props) {
