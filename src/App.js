@@ -4,35 +4,41 @@ import Todolist from './components/TodoBody.js';
 import Addlistbutton from './components/NewTodoButton.js';
 import Navbar from './components/Dashboard.js';
 import InputComponent from './components/InputInfo.js';
+import FormComponent from './components/FormComponent.js';
 
-function Projectdashboard() {
+function Projectdashboard(props) {
   const [todos, settodos] = useState([]);
   const [clickedtimes, setClickedtimes] = useState(0)
 
-  const createNewTodo = () => {
-    setClickedtimes(prevClickedtimes => prevClickedtimes + 1)
+
+  const submitData = (data) => {
     const newTodoObj = {
       id: clickedtimes,
-      "title": "First Todo",
-      "Description": "",
-      "dueDate": "",
-      "priority": "",
+      "title": data.title,
+      "Description": data.description,
+      "dueDate": props.due,
+      "priority": props.priority,
       active: true,
     };
-    settodos(prevTodos => [...prevTodos, newTodoObj]);
-    console.log(todos)
+      setClickedtimes(prevClickedtimes => prevClickedtimes + 1)
+      settodos(prevTodos => [...prevTodos, newTodoObj]);
+      console.log(todos)
   };
+
+
+  // onClick={createNewTodo} 
+
 
   return (
     <div>
-      <Addlistbutton onClick={createNewTodo} />
+      <FormComponent onSubmit={submitData}/>
+
+      <Addlistbutton />
       <div className='todo-handler'>
         {todos.map((data) => (
           <Todolist key={data.id} title={data.title} />
         ))}
       </div>
-      
-      
     </div>
   );
 }
@@ -41,8 +47,8 @@ function Projectdashboard() {
 function App() {
   return (
     <div className="App">
-      <InputComponent />
       <Navbar />
+
       <div className='wrapper-container'>
         <Projectdashboard />
       </div>
