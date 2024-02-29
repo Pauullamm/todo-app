@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Todolist from './components/TodoBody.js';
 import Addlistbutton from './components/NewTodoButton.js';
 import FormComponent from './components/FormComponent.js';
@@ -9,7 +9,6 @@ function Projectdashboard() {
   const [todos, settodos] = useState([]); // creates an array for todo components to be rendered 
   const [clickedtimes, setClickedtimes] = useState(0); // this is to ensure that each todo has a unique id, important esp for rendering lists
   const [formdisplay, setformdisplay] = useState(false); // state management for the input field ?necessary
-  const [parentClickedStatus, setParentClickedStatus] = useState(false);
   // const [showDivs, setShowDivs] = useState(true);
   
 
@@ -24,7 +23,7 @@ function Projectdashboard() {
       "title": data.title,
       "Description": data.description,
       "priority": data.category,
-      closed: parentClickedStatus,
+      closed: false, // this should be closed by default
     };
 
       setClickedtimes(prevClickedtimes => prevClickedtimes + 1)
