@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Todolist from './components/TodoBody.js';
 import Addlistbutton from './components/NewTodoButton.js';
 import FormComponent from './components/FormComponent.js';
@@ -9,9 +9,12 @@ function Projectdashboard() {
   const [todos, settodos] = useState([]); // creates an array for todo components to be rendered 
   const [clickedtimes, setClickedtimes] = useState(0); // this is to ensure that each todo has a unique id, important esp for rendering lists
   const [formdisplay, setformdisplay] = useState(false); // state management for the input field ?necessary
-  const [parentClickedStatus, setParentClickedStatus] = useState(false);
   // const [showDivs, setShowDivs] = useState(true);
   
+
+  const handleForm = () => {
+    setformdisplay(true);
+  }
 
   const submitData = (data) => {
 
@@ -24,20 +27,18 @@ function Projectdashboard() {
       "title": data.title,
       "Description": data.description,
       "priority": data.category,
-      closed: parentClickedStatus,
+      closed: false, // this should be closed by default
     };
 
-      setClickedtimes(prevClickedtimes => prevClickedtimes + 1)
-      settodos(prevTodos => [...prevTodos, newTodoObj]); //pushing a new todo object to the todos array
+    setClickedtimes(prevClickedtimes => prevClickedtimes + 1)
+    settodos(prevTodos => [...prevTodos, newTodoObj]); //pushing a new todo object to the todos array
+
   };
 
-  const revealForm = () => {
-    setformdisplay(true);
-  }
   
   return (
     <div>
-      <Addlistbutton onClick={revealForm}/>
+      <Addlistbutton onClick={handleForm}/>
 
       <FormComponent onSubmit={submitData} reveal={formdisplay}/>
 
@@ -55,7 +56,7 @@ export default function App() {
   return (
     <div className="App">
       {/* <Navbar /> */}
-
+      <h1 class="title" >Another To-Do App</h1>
       <div className='wrapper-container'>
         <Projectdashboard />
       </div>
