@@ -1,15 +1,15 @@
 import './App.css';
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect } from 'react'
 import Todolist from './components/TodoBody.js';
 import Addlistbutton from './components/NewTodoButton.js';
-// import Navbar from './components/Dashboard.js';
 import FormComponent from './components/FormComponent.js';
+// import Navbar from './components/Dashboard.js';
 
 function Projectdashboard() {
   const [todos, settodos] = useState([]); // creates an array for todo components to be rendered 
   const [clickedtimes, setClickedtimes] = useState(0); // this is to ensure that each todo has a unique id, important esp for rendering lists
   const [formdisplay, setformdisplay] = useState(false); // state management for the input field ?necessary
-  
+  const [parentClickedStatus, setParentClickedStatus] = useState(false);
   // const [showDivs, setShowDivs] = useState(true);
   
 
@@ -24,7 +24,7 @@ function Projectdashboard() {
       "title": data.title,
       "Description": data.description,
       "priority": data.category,
-      active: true,
+      closed: parentClickedStatus,
     };
 
       setClickedtimes(prevClickedtimes => prevClickedtimes + 1)
@@ -34,24 +34,6 @@ function Projectdashboard() {
   const revealForm = () => {
     setformdisplay(true);
   }
-
-  const listsToCheck = document.getElementsByClassName("todo-container");
-  console.log(listsToCheck[0].childNodes[0].className)
-
-  //NEED TO FIX THIS
-  useEffect(() =>{
-    try {
-      if (listsToCheck[0].childNodes[0]["clickedstatus"] === "true") {
-        console.log('clicked')
-      }
-      console.log(listsToCheck[0].childNodes[0]);
-    } catch (error) {
-      console.log("unknown error occurred")
-    }
-    
-    
-    
-  }, [listsToCheck])
   
   return (
     <div>
@@ -61,7 +43,7 @@ function Projectdashboard() {
 
       <div className='todo-handler'>
         {todos.map((info) => (
-        <Todolist key={info.id} title={info.title} desc={info.Description} priority={info.priority} closed={!info.active} />
+        <Todolist key={info.id} title={info.title} desc={info.Description} priority={info.priority} closed={info.closed} closer_id={info.id}/>
       ))}
         </div>
     </div>

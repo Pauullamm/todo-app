@@ -20,10 +20,11 @@ function TodoDesc(props) {
 
 
 function Todolist(props) {
-
-
-
-
+    const [isVisible, setIsVisible] = useState(!props.closed);
+    //props.closed === false by default -> this is state data from app.js
+    const handleClose = () => {
+        setIsVisible(!isVisible);
+    }
 
 // function to add new list items to todo-list
     var outputColor = ""
@@ -40,17 +41,13 @@ function Todolist(props) {
 
 
 
-    return (
-        <>
+    return isVisible ? (
         <div className='todo-container' style={{backgroundColor : outputColor}}>
-            <TodoClose />
+            <TodoClose key={props.closer_id} onClose={handleClose}/>
             <Todoname className="todo-title" name={props.title}/>
             <TodoDesc className="todo-description" desc={props.desc}/>
         </div>
-        </>
-        
-        
-    )
-    }
+    ) : null;
+    };
 
 export default Todolist
