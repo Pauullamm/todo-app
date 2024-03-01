@@ -1,5 +1,6 @@
 Body {
   background-color: #F5E8DD;
+  height: 100vh;
 }
 
 
@@ -7,15 +8,22 @@ p {
   margin: 0;
 }
 
+.title-container {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  z-index: -1;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  align-items: center;
+}
 .title {
-  position: fixed; 
-  right: 0;
-  top: 0;
-  width: max-content; 
-  right: 20px; 
   font-family: Nothing You Could Do, cursive; 
-  font-weight: 400; 
+  font-weight: 800; 
   font-style: normal;
+  font-size: 130px;
+  opacity: 0.2
 }
 
 .navbar-container {
@@ -24,6 +32,9 @@ p {
   background-color: black;
 }
 
+.project-dashboard {
+  display: flex;
+}
 
 .todo-container {
   height: max-content;
@@ -79,21 +90,6 @@ p {
   white-space: normal;
 }
 
-
-
-/* .new-list-button {
-  height: 50px;
-  width: 70px;
-  background-color: #B5C0D0;
-  border-radius: 10px;
-  color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
-  transition: scale 0.1s ease-in-out;
-} */
-
 .new-list-button {
   margin: 0;
   padding: 17px;
@@ -123,6 +119,20 @@ p {
 
 .form-container {
   margin-top: 30px;
+  width: max-content;
+}
+
+.hiddenDiv {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+
+.visibleDiv {
+  opacity: 1;
+  max-height: 1000px; /* Adjust based on the expected maximum height of your content */
+  transition: opacity 0.3s ease, max-height 0.3s ease;
 }
 
 .input-item {
@@ -139,6 +149,15 @@ p {
   border-color: black;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
 
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+.description-container {
+  display: flex;
+  flex-direction: column;
 }
 
 select {

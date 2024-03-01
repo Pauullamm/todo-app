@@ -1,9 +1,11 @@
 import './App.css';
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Todolist from './components/TodoBody.js';
 import Addlistbutton from './components/NewTodoButton.js';
 import FormComponent from './components/FormComponent.js';
 // import Navbar from './components/Dashboard.js';
+
+const cors = require("cors");
 
 function Projectdashboard() {
   const [todos, settodos] = useState([]); // creates an array for todo components to be rendered 
@@ -37,30 +39,65 @@ function Projectdashboard() {
 
   
   return (
-    <div>
-      <Addlistbutton onClick={handleForm}/>
-
-      <FormComponent onSubmit={submitData} reveal={formdisplay}/>
-
+    <div className='project-dashboard'>
+      <div className='widgets'>
+        <Addlistbutton onClick={handleForm}/>
+        <FormComponent onSubmit={submitData} reveal={formdisplay}/>
+      </div>
       <div className='todo-handler'>
         {todos.map((info) => (
         <Todolist key={info.id} title={info.title} desc={info.Description} priority={info.priority} closed={info.closed} closer_id={info.id}/>
       ))}
-        </div>
+      </div>
     </div>
   );
 }
 
 
 export default function App() {
+
+  
+  //testing backend------------------------------------
+  
+  const data ={name: "blahblah", age: 0, date: "blahblah"}
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  };
+  console.log(options.body)
+  
+  useEffect(() => {
+    fetch('http://localhost:5000/memo-data', options)
+    .then(response => {
+      if (!response.ok) {
+        console.log(response);
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(info => {
+      console.log(info);
+    })
+    .catch(error => {
+      console.error('Fetch error:', error);
+    });
+  })
+
+//--------------------------------------------------
   return (
     <div className="App">
       {/* <Navbar /> */}
-      <h1 class="title" >Another To-Do App</h1>
+      <div className='title-container'>
+        <h1 class="title" >Another To-Do App</h1>
+      </div>
+        
       <div className='wrapper-container'>
         <Projectdashboard />
       </div>
-      
     </div>
   );
 }
