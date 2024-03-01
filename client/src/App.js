@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Todolist from './components/TodoBody.js';
 import Addlistbutton from './components/NewTodoButton.js';
 import FormComponent from './components/FormComponent.js';
@@ -30,39 +30,67 @@ function Projectdashboard() {
       closed: false, // this should be closed by default
     };
 
+    
+
     setClickedtimes(prevClickedtimes => prevClickedtimes + 1)
     settodos(prevTodos => [...prevTodos, newTodoObj]); //pushing a new todo object to the todos array
 
-  };
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    };
 
+    fetch('/memo-data', options)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    // .then(info => {
+    //   console.log(info);
+    // })
+    .catch(error => {
+      console.error('Fetch error:', error);
+    });
+  };
   
   return (
-    <div>
-      <Addlistbutton onClick={handleForm}/>
-
-      <FormComponent onSubmit={submitData} reveal={formdisplay}/>
-
+    <div className='project-dashboard'>
+      <div className='widgets'>
+        <Addlistbutton onClick={handleForm}/>
+        <FormComponent onSubmit={submitData} reveal={formdisplay}/>
+      </div>
       <div className='todo-handler'>
         {todos.map((info) => (
         <Todolist key={info.id} title={info.title} desc={info.Description} priority={info.priority} closed={info.closed} closer_id={info.id}/>
       ))}
-        </div>
+      </div>
     </div>
   );
 }
 
 
 export default function App() {
+
+  
+  //testing backend------------------------------------
+  
+  
+//--------------------------------------------------
   return (
     <div className="App">
       {/* <Navbar /> */}
-      <h1 class="title" >Another To-Do App</h1>
+      <div className='title-container'>
+        <h1 class="title" >Another To-Do App</h1>
+      </div>
+        
       <div className='wrapper-container'>
         <Projectdashboard />
       </div>
-      
     </div>
   );
 }
-
-// export default App;

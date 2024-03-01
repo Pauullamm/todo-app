@@ -1,4 +1,5 @@
 // FormComponent.js
+import React from "react";
 import { useForm, Controller } from "react-hook-form";
 
 const FormComponent = (props) => {
@@ -18,7 +19,7 @@ const FormComponent = (props) => {
     <div className="form-container" style={output_reveal}>
     <form onSubmit={handleSubmit(props.onSubmit)}>
         
-        <div>
+        <div className="input-container">
             <label>Title:</label>
             <Controller
             name="title"
@@ -28,13 +29,13 @@ const FormComponent = (props) => {
             />
             {/* <input className="input-item" {...register("title")} /> */}
         </div>
-        <div>
+        <div className="description-container">
             <label>Description:</label>
             <Controller
             name="description"
             control={control}
             defaultValue=""
-            render={({ field }) => <input className="input-item" {...field} />}
+            render={({ field }) => <textarea className="input-item" {...field} />}
             />
             {/* <input className="input-item" {...register("description")} /> */}
         </div>
