@@ -5,8 +5,6 @@ import Addlistbutton from './components/NewTodoButton.js';
 import FormComponent from './components/FormComponent.js';
 // import Navbar from './components/Dashboard.js';
 
-const cors = require("cors");
-
 function Projectdashboard() {
   const [todos, settodos] = useState([]); // creates an array for todo components to be rendered 
   const [clickedtimes, setClickedtimes] = useState(0); // this is to ensure that each todo has a unique id, important esp for rendering lists
@@ -32,11 +30,33 @@ function Projectdashboard() {
       closed: false, // this should be closed by default
     };
 
+    
+
     setClickedtimes(prevClickedtimes => prevClickedtimes + 1)
     settodos(prevTodos => [...prevTodos, newTodoObj]); //pushing a new todo object to the todos array
 
-  };
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    };
 
+    fetch('/memo-data', options)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    // .then(info => {
+    //   console.log(info);
+    // })
+    .catch(error => {
+      console.error('Fetch error:', error);
+    });
+  };
   
   return (
     <div className='project-dashboard'>
@@ -59,34 +79,7 @@ export default function App() {
   
   //testing backend------------------------------------
   
-  const data ={name: "blahblah", age: 0, date: "blahblah"}
-
-  const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  };
-  console.log(options.body)
   
-  useEffect(() => {
-    fetch('http://localhost:5000/memo-data', options)
-    .then(response => {
-      if (!response.ok) {
-        console.log(response);
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(info => {
-      console.log(info);
-    })
-    .catch(error => {
-      console.error('Fetch error:', error);
-    });
-  })
-
 //--------------------------------------------------
   return (
     <div className="App">
@@ -101,5 +94,3 @@ export default function App() {
     </div>
   );
 }
-
-// export default App;

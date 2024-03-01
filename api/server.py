@@ -11,9 +11,11 @@ memo_list = []
 @app.route('/memo-data', methods=['POST'])
 def store_memo():
     try:
-        new_data = request.json
-        print(new_data)
+        new_data = request.get_json()
+        memo_list.append(new_data)
+        print(memo_list)
         return jsonify(new_data)
+    
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     
