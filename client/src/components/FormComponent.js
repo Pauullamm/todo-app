@@ -50,7 +50,7 @@ const FormComponent = (props) => {
             render={({ field }) => (
             <div className="custom-select">
                 <select {...field}>
-                    <option value=""><p>Select Priority...</p></option>
+                    <option value="">Select Priority...</option>
                     <option value="Low">Low</option>
                     <option value="Medium">Medium</option>
                     <option value="High">High</option>
