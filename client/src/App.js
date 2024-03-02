@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Todolist from './components/TodoBody.js';
 import Addlistbutton from './components/NewTodoButton.js';
 import FormComponent from './components/FormComponent.js';
@@ -43,7 +43,7 @@ function Projectdashboard() {
       body: JSON.stringify(data)
     };
 
-    fetch('/memo-data', options)
+    fetch('/memo-store', options)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -76,11 +76,31 @@ function Projectdashboard() {
 
 export default function App() {
 
-  
-  //testing backend------------------------------------
-  
-  
-//--------------------------------------------------
+  const get_options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  };
+
+  useEffect(() =>{
+    fetch('/memo-retrieve', get_options)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json()
+    })
+    .then(data => {
+      console.log('Data from the backend', data);
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+    
+  }, []);
+
+
   return (
     <div className="App">
       {/* <Navbar /> */}
