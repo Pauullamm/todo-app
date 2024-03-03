@@ -28,10 +28,10 @@ function Todolist(props) {
 
 // function to add new list items to todo-list
     var outputColor = ""
-    if (props.priority === "High") {
+    if (props.category === "High") {
         outputColor = "#FF8080";
     }
-    else if (props.priority === "Medium") {
+    else if (props.category === "Medium") {
         outputColor = "#FFCF96";
     }
     else {
