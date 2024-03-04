@@ -1,6 +1,7 @@
 import '../App.css';
-import React , { useState } from "react";
+import React , { useState, useContext } from "react";
 import TodoClose from './TodoClose';
+import deletionContext from '../DeletionContext';
 
 function Todoname(props) {
     return (
@@ -19,19 +20,22 @@ function TodoDesc(props) {
 };
 
 
-function Todolist(props) {
-    const [isVisible, setIsVisible] = useState(!props.closed);
+function Todolist({ closed, category, todo_display, closer_id, title, desc }) {
+    const [isVisible, setIsVisible] = useState(!closed);
+    const { delete_todo } = useContext(deletionContext);
     //props.closed === false by default -> this is state data from app.js
     const handleClose = () => {
         setIsVisible(!isVisible);
+        console.log(delete_todo)
+        delete_todo(closer_id)
     }
 
 // function to add new list items to todo-list
     var outputColor = ""
-    if (props.category === "High") {
+    if (category === "High") {
         outputColor = "#FF8080";
     }
-    else if (props.category === "Medium") {
+    else if (category === "Medium") {
         outputColor = "#FFCF96";
     }
     else {
@@ -43,9 +47,10 @@ function Todolist(props) {
 
     return isVisible ? (
         <div className='todo-container' style={{backgroundColor : outputColor}}>
-            <TodoClose key={props.closer_id} onClose={handleClose}/>
-            <Todoname className="todo-title" name={props.title}/>
-            <TodoDesc className="todo-description" desc={props.desc}/>
+            
+            <TodoClose key={closer_id} onClose={handleClose}/>
+            <Todoname className="todo-title" name={title}/>
+            <TodoDesc className="todo-description" desc={desc}/>
         </div>
     ) : null;
     };

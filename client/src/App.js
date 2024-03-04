@@ -3,14 +3,35 @@ import React, { useEffect, useState } from 'react'
 import Todolist from './components/TodoBody.js';
 import Addlistbutton from './components/NewTodoButton.js';
 import FormComponent from './components/FormComponent.js';
+import deletionContext from './DeletionContext.js';
 // import Navbar from './components/Dashboard.js';
-
 
 
 function Projectdashboard() {
   const [todos, settodos] = useState([]); // creates an array for todo components to be rendered 
   const [clickedtimes, setClickedtimes] = useState(0); // this is to ensure that each todo has a unique id, important esp for rendering lists
   const [formdisplay, setformdisplay] = useState(false); // state management for the input field ?necessary
+
+  const deleteFunction = (deletingData) => {
+    const remove_options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(deletingData)
+    };
+    fetch('/memo-remove', remove_options)
+    .then(response => {
+      if (!response.ok) {
+        console.log(response)
+        throw new Error('Network response was not ok');
+      }
+      return response.json()
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+  }
 
   const get_options = {
     method: 'GET',
@@ -50,10 +71,10 @@ function Projectdashboard() {
 
     const newTodoObj = {
       id: clickedtimes,
-      Title: data.title,
-      Description: data.description,
-      Category: data.category,
-      Closed: false, // this should be closed by default
+      title: data.title,
+      description: data.description,
+      category: data.category,
+      closed: false,
     };
 
     
@@ -89,11 +110,14 @@ function Projectdashboard() {
         <Addlistbutton onClick={handleForm}/>
         <FormComponent onSubmit={submitData} reveal={formdisplay}/>
       </div>
-      <div className='todo-handler'>
-        {todos.map((info) => (
-        <Todolist key={info.id} title={info.title} desc={info.description} category={info.category} closed={info.closed} closer_id={info.id}/>
-      ))}
-      </div>
+      <deletionContext.Provider value={{delete_todo: deleteFunction}}>
+        <div className='todo-handler'>
+          {todos.map((info) => (
+          <Todolist key={info.id} title={info.title} desc={info.description} category={info.category} closed={info.closed} closer_id={info.id} todo_display={deleteFunction}/>
+        ))}
+        </div>
+      </deletionContext.Provider>
+      
     </div>
   );
 }
