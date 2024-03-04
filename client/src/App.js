@@ -13,14 +13,15 @@ function Projectdashboard() {
   const [formdisplay, setformdisplay] = useState(false); // state management for the input field ?necessary
 
   const deleteFunction = (deletingData) => {
+
     const remove_options = {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(deletingData)
     };
-    fetch('/memo-remove', remove_options)
+    fetch(`/memo-remove/${deletingData}`, remove_options)
     .then(response => {
       if (!response.ok) {
         console.log(response)
@@ -113,7 +114,7 @@ function Projectdashboard() {
       <deletionContext.Provider value={{delete_todo: deleteFunction}}>
         <div className='todo-handler'>
           {todos.map((info) => (
-          <Todolist key={info.id} title={info.title} desc={info.description} category={info.category} closed={info.closed} closer_id={info.id} todo_display={deleteFunction}/>
+          <Todolist key={info.id} title={info.title} desc={info.description} category={info.category} closed={info.closed} closer_id={info.id}/>
         ))}
         </div>
       </deletionContext.Provider>

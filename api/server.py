@@ -57,27 +57,32 @@ def get_memo():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route(memo_remove_url, methods=['POST'])
-def delete_memo():
+@app.route(memo_remove_url, methods=['PATCH'])
+def delete_memo(item_id):
     try:
         removing_data = request.get_json()
-
         print(f"index of todo data to be removed: {removing_data}")
         folder_path = os.path.join(os.path.dirname(__file__), 'memo-storage')
         json_file_path = os.path.join(folder_path, 'data.json')
+
         if os.path.exists(json_file_path):
             with open(json_file_path, 'r') as f:
                 data = json.load(f)
-                print(data)
-            if removing_data < 0 or removing_data >= len(data):
-                raise ValueError("To-Do storage index out of range")
-            del data[removing_data]
+                    
+            removed_item = data.pop(item_id)
             with open(json_file_path, 'w') as f:
                 json.dump(data, f)
-                return jsonify(data)
+            return jsonify({"message": f"Item with ID {item_id} removed", "removedI-tem": removed_item})
+            
+            # if removing_data < 0 or removing_data >= len(data):
+            #     raise ValueError("To-Do storage index out of range")
+            # del data[removing_data]
+            # with open(json_file_path, 'w') as f:
+            #     json.dump(data, f)
+            #     return jsonify(data)
     
     except Exception as e:
-        return jsonify({'error': e}), 500
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

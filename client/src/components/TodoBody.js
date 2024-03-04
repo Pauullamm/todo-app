@@ -20,7 +20,7 @@ function TodoDesc(props) {
 };
 
 
-function Todolist({ closed, category, todo_display, closer_id, title, desc }) {
+function Todolist({ closed, category, closer_id, title, desc }) {
     const [isVisible, setIsVisible] = useState(!closed);
     const { delete_todo } = useContext(deletionContext);
     //props.closed === false by default -> this is state data from app.js
@@ -41,9 +41,6 @@ function Todolist({ closed, category, todo_display, closer_id, title, desc }) {
     else {
         outputColor = "#ADBC9F";
     };
-//------------------------------------------------------
-
-
 
     return isVisible ? (
         <div className='todo-container' style={{backgroundColor : outputColor}}>
