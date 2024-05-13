@@ -6,6 +6,7 @@ import datetime
 from dotenv import load_dotenv
 import os
 import json
+import sqlite3
 
 load_dotenv()
 memo_retrieve_url = os.getenv("MEMO_RETRIEVE_URL")
@@ -18,9 +19,10 @@ app = Flask(__name__)
 CORS(app)
 
 #DB configuration:
-# app.config('MONGODB_SETTINGS')  = {
-#     "db": "server"
-# }
+conn = sqlite3.connect("notes.db")
+cur = conn.cursor()
+cur.execute('''CREATE TABLE IF NOT EXIST
+            notes(title, description, category)''')
 
 memo_list = []
 @app.route(memo_store_url, methods=['POST'])
@@ -37,6 +39,12 @@ def store_memo():
         with open (json_file_path, 'w') as json_file:
             json.dump(memo_list, json_file, indent=2)
         print(f"JSON content written to: {json_file_path}")
+
+        #adding to db
+        cur.execute(f'''
+                    INSERT INTO notes VALUES
+                    ({new_data["title"], new_data["description"], new_data["category"]})''')
+        conn.commit()
         #-----------------------------------------------------------------
         return jsonify(new_data)
     
