@@ -1,11 +1,21 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from flask_mongoengine import MongoEngine
-import mongoengine as me
+# from flask_mongoengine import MongoEngine
+# import mongoengine as me
 import datetime
 from dotenv import load_dotenv
 import os
 import json
+import sqlite3
+
+
+# db config
+conn = sqlite3.connect("notes.db")
+cur = conn.cursor()
+cur.execute('''
+            CREATE TABLE IF NOT EXISTS notes
+            (title, description, category)''')
+
 
 load_dotenv()
 memo_retrieve_url = os.getenv("MEMO_RETRIEVE_URL")
@@ -17,10 +27,7 @@ x = datetime.datetime.now()
 app = Flask(__name__)
 CORS(app)
 
-#DB configuration:
-# app.config('MONGODB_SETTINGS')  = {
-#     "db": "server"
-# }
+# Database configuration
 
 memo_list = []
 @app.route(memo_store_url, methods=['POST'])
@@ -37,6 +44,11 @@ def store_memo():
         with open (json_file_path, 'w') as json_file:
             json.dump(memo_list, json_file, indent=2)
         print(f"JSON content written to: {json_file_path}")
+
+        #storing in database
+        cur.execute(f'''INSERT INTO notes VALUES
+                    {new_data["title"], new_data["description"], new_data["category"]}''')
+        conn.commit()
         #-----------------------------------------------------------------
         return jsonify(new_data)
     
