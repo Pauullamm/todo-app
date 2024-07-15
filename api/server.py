@@ -17,11 +17,6 @@ x = datetime.datetime.now()
 app = Flask(__name__)
 CORS(app)
 
-#DB configuration:
-# app.config('MONGODB_SETTINGS')  = {
-#     "db": "server"
-# }
-
 memo_list = []
 @app.route(memo_store_url, methods=['POST'])
 def store_memo():
